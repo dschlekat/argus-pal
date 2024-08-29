@@ -1,22 +1,10 @@
-# ASTR502: Target Finding Group
-# Finding asteroids observable by Pathfinder
+# Argus PAL
+This is an in-progress script that generates detailed ephemera for asteroids visible to the Argus Pathfinder instrument ([https://evryscope.astro.unc.edu/2022/12/06/argus-pathfinder-deployed-to-pari/](url), Vasquez et al. 2024) each night. The Argus Pathfinder is a multi-camera, wide-field instrument capable of high-cadence surveys of the night sky. This project was originally started for the class ASTR 502: Modern Research in Astrophysics at UNC-Chapel Hill during the spring semester of 2024. Eventually, the PAL will be able to return an ephemera for any on-sky location over any set period of time.
 
-## Task overview
-To determine which asteroids are observable, and locate them within Pathfinder images, we needed to create a program capable of querying their ephemeris database from an external database.
-The program had to be able to query the database for a certain right ascension (RA) range based on the date of observation (which affects the sidereal time), a declination (Dec) range based on Pathfinder's field-of-view (FoV), and the date of observation.
-The program had to be able to take input dates to query.
-
-## Task plan
-  - Generate a list of dates for observation
-  - Create an object to query the Lowell Asteroid Ephemeris database based on input parameters
-  - Create an object to read a list of dates and determine the observable RA range for each date
-  - Create a pipeline that takes in an input date, or list of dates, and queries the database, writing the responses to .txt files in JSON format.
-
-## Task results
+## Use
 **Note:** to run each of the files, one must have activated a Python environment containing the dependency packages imported in pipeline.py, query.py, and import.py.
 An actual requirements.txt file and instructions on installing these dependencies into a virtual environment will be written eventually.
 All instructions for running the programs in a command-line interface assume that the user has changed directories into pathfinder_targets.
-This can be done (when originally located in astr502_spring2024) by running `cd target_finding/graphQL_queries/pathfinder_targets`.
 
 The following are files/folders contained within the pathfinder_targets folder:
  
@@ -91,3 +79,5 @@ The following are files/folders contained within the pathfinder_targets folder:
             - "dec_rate": The on-sky movement rate of the asteroid's right ascension, units unknown.
             - "v_mag": The visible magnitude of the asteroid from Earth on the queried date.
 
+## Attribution
+This code can be used freely as long as the user attributes credit to the author (Donovan Schlekat).
