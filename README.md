@@ -2,15 +2,19 @@
 This is an in-progress script that generates detailed ephemera for asteroids visible to the Argus Pathfinder instrument ([https://evryscope.astro.unc.edu/2022/12/06/argus-pathfinder-deployed-to-pari/](url), Vasquez et al. 2024) each night. The Argus Pathfinder is a multi-camera, wide-field instrument capable of high-cadence surveys of the night sky. This project was originally started for the class ASTR 502: Modern Research in Astrophysics at UNC-Chapel Hill during the spring semester of 2024. Eventually, the PAL will be able to return an ephemera for any on-sky location over any set period of time.
 
 ## Use
-**Note:** to run each of the files, one must have activated a Python environment containing the dependency packages imported in pipeline.py, query.py, and import.py.
-An actual requirements.txt file and instructions on installing these dependencies into a virtual environment will be written eventually.
-All instructions for running the programs in a command-line interface assume that the user has changed directories into pathfinder_targets.
+**Note:** to run each of the files create a virtual environment and install the required packages (with pip) using the following commands:
+```
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+All instructions for running the programs in a command-line interface assume that the user has changed directories into the main subdirectory argus-pal.
 
-The following are files/folders contained within the pathfinder_targets folder:
+The following are files/folders contained within the argus-pal folder:
  
   - **datemaker.py**
      - Creates a .txt file with dates from the date the program is run until the final day of the semester (May 10th).
-       - Resulting file path: `astr502_spring2024/target_finding/graphQL_queries/pathfinder_targets/data/all_dates_PF.txt`
+       - Resulting file path: `argus-pal/data/all_dates_PF.txt`
      - Run in the command line as `python datemaker.py`
        - (Note: you may need to specify the Python version: `python3 datemaker.py`)
  
