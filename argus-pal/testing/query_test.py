@@ -5,7 +5,7 @@ Outputs the results to the testing/query_test_results.txt file for testing.
 import os, sys
 import numpy as np
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from query import Query
+from classes import Query
 
 # Query Parameters
 v_mag_1 = 16      ## limiting magnitude for 1s Pathfinder exposures

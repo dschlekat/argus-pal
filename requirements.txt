@@ -1,0 +1,15 @@
+astropy==6.0.1
+astropy-iers-data==0.2024.8.27.10.28.29
+certifi==2024.7.4
+charset-normalizer==3.3.2
+DateTime==5.5
+idna==3.8
+numpy==1.26.4
+packaging==24.1
+pyerfa==2.0.1.4
+pytz==2024.1
+PyYAML==6.0.2
+requests==2.32.3
+tqdm==4.66.5
+urllib3==2.2.2
+zope.interface==7.0.3

@@ -5,5 +5,8 @@ argus-pal/test/**.txt
 # Python cache files
 __pycache__/
 
+# Virtual Environment
+venv/
+
 # VS Code
 .DS_Store

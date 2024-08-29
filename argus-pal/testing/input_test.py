@@ -4,7 +4,7 @@ Outputs the times to the testing/input_test_results.txt file for testing.
 """
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from inputs import Input
+from classes import Input
 from astropy.coordinates import SkyCoord
 import astropy.units as u
 
