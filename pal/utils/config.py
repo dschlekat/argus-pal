@@ -1,7 +1,6 @@
 import configparser
 from typing import List
 
-
 """
     Config utility functions
     
@@ -23,7 +22,7 @@ def read(path: str) -> configparser.ConfigParser:
     return config
 
 
-def get(config: configparser.ConfigParser, section: str, option: str) -> str | None:
+def get(config: configparser.ConfigParser, section: str, option: str) -> str:
     """ Retrieves the key from the provided config file and section.
     Returns None if the key is not found.
 
@@ -40,7 +39,7 @@ def get(config: configparser.ConfigParser, section: str, option: str) -> str | N
         return None
 
 
-def expected_type(value: str) -> str | float | bool | List | None:
+def expected_type(value: str):
     """ Converts the parsed config value into the expected type.
 
     :param value: parsed config value

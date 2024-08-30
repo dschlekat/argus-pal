@@ -1,10 +1,5 @@
-"""
-This script is used to query the Lowell Observatory ephemeris tool for asteroid locations throughout the nights of observation.
-It allows the user to input dates manually or use a preset file containing a list of dates.
-The results are written to a file for further analysis.
-"""
-from classes.inputs import Input
-from classes.propogate import Propogate
+from .inputs import Input
+from .propogate import Propogate
 import os
 import time
 import datetime
@@ -12,10 +7,19 @@ import json
 import sys
 from tqdm import tqdm
 
+"""
+    This script is used to query the Lowell Observatory ephemeris tool for asteroid locations throughout the nights of observation.
+    It allows the user to input dates manually or use a preset file containing a list of dates.
+    The results are written to a file for further analysis.
+"""
 
 # Firm Propogation Parameters
 observatory = 256 ## observatory code for GBO
 calculation_mode = -1
+
+def execute(**kwargs):
+    print("executed")
+    return 0
 
 # Main function to run the program
 def main():

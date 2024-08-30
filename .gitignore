@@ -1,6 +1,7 @@
-# Data and Test Text Files
-argus-pal/data/**.txt
-argus-pal/test/**.txt
+# Data Text Files
+pal/results/ephemera/**.json
+pal/results/logs/**.txt
+pal/results/observable/**.json
 
 # Python cache files
 __pycache__/
