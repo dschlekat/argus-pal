@@ -5,7 +5,6 @@ import os
 
 from pal.astorb.pipeline import pipeline
 from pal.astorb.propogate import propogate
-from pal.utils.asteroid import Asteroid
 from pal.utils.telescope import Telescope
 
 """
@@ -105,11 +104,14 @@ def log_results(ephemera, **kwargs):
     start_str = kwargs['start_date']
     end_str = kwargs['end_date']
     telescope = kwargs['telescope']
-    file_name = f"pal/results/logs/{telescope}_{start_str}_to_{end_str}.txt"
+    now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    file_name = f"pal/results/logs/{telescope}_eph_log_{now}.txt"
     with open(file_name, 'w') as f:
         f.write(f"Ephemera successfully generated for {telescope} between the dates of {start_str} and {end_str}. \n")
-        f.write("Ephemera data available at the following file paths: \n")
+        f.write("Ephemera data available at the following file paths: \n \n")
         for file in ephemera:
             f.write(file)
             f.write('\n')
-        return 0
+    print('Ephemra data successfully logged.')
+    print(f'Log file available at {file_name}')
+    return 0

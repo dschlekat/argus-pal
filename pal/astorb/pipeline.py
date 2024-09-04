@@ -30,6 +30,7 @@ def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list
         v_mag = 30
 
     files = []
+    total_asteroids = 0
 
     loop = tqdm(dates, desc="Querying database", leave=False)
     for date in loop:
@@ -56,7 +57,7 @@ def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list
 
         data = query.response.json()['data']['ephemeris']
         num_asteroids = len(data)
-        total_asteroids = num_asteroids
+        total_asteroids += num_asteroids
 
         continue_query = True
         while continue_query:
@@ -76,8 +77,15 @@ def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list
 
         end_time = time.time()
         date_str = date.strftime("%Y-%m-%d")
-        desc = f"Ephemeris data for {date_str} written to file. {num_asteroids} asteroids observable. Time elapsed: {end_time - start_time:.2f} seconds."
+        desc = f"Ephemeris data for {date_str} written to file. {num_asteroids} asteroids observable. Time elapsed: {end_time - start_time:.2f} seconds. "
         loop.set_description(desc, refresh=True)
+
+    if total_asteroids != 0:
+        desc = f"Ephemera complete. Total of {total_asteroids} asteroids observable."
+    else:
+        desc = "Ephemera complete. All dates have already been queried. "
+    loop.set_description(desc, refresh=True)
+    print(loop)
 
     return files
 

@@ -24,6 +24,7 @@ from importlib import import_module
 # DONE: Implement query code in pipeline.py
 # DONE: Implement logging code in ephemeris.py and logging.py
 
+# TODO: Fix query retrying when max asteroids is reached
 # TODO: Remove datetime dependency
 # TODO: Implement propogate code in propogate.py
 # TODO: Implement sqlite database for storing results
