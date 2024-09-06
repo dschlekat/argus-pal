@@ -9,7 +9,8 @@ from pal.utils import config
     Contains the Telescope class, which is used to represent the desired instrument to be used for observability calculations.
 """
 
-# TODO: Fix times in time-dependent classes.
+# DONE: Fix times in time-dependent classes.
+# TODO: Remove datetime dependency
 
 class Telescope():
 

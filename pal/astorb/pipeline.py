@@ -15,7 +15,6 @@ from pal.utils.telescope import Telescope
 """
 
 # TODO: Fix query retrying
-# TODO: Fix total observable asteroid count comment
 
 def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list[str]:
     """ Query the Lowell Observatory Astorb database for asteroids visible in the sky at the time of observation.
@@ -34,6 +33,8 @@ def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list
 
     loop = tqdm(dates, desc="Querying database", leave=False)
     for date in loop:
+
+        num_asteroids_day = 0
         file_name = already_queried(date, telescope)
         if file_name != False:
             files.append(file_name)
@@ -55,20 +56,25 @@ def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list
         if not query.response.ok:
             raise ValueError("Query error: ", query.response)
 
-        data = query.response.json()['data']['ephemeris']
-        num_asteroids = len(data)
+        response = query.response.json()['data']['ephemeris']
+        data = response
+        num_asteroids = len(response)
+        num_asteroids_day += num_asteroids
         total_asteroids += num_asteroids
+        last_id = response[-1]['minorplanet']['ast_number']
 
         continue_query = True
         while continue_query:
             if num_asteroids == 1000:
                 #requery for the same date with the last asteroid id as the new limit
-                last_id = data[-1]['minorplanet']['ast_number']
                 query.build_query(ra_min=b_ra_min, ra_max=b_ra_max, dec_min=b_dec_min, dec_max=b_dec_max, date=date, mag_lim=v_mag, last_id=last_id)
                 query.get_results()
-                data.extend(query.response.json()['data']['ephemeris'])
-                num_asteroids = len(data)
-                total_asteroids = total_asteroids + num_asteroids
+                response = query.response.json()['data']['ephemeris']
+                last_id = response[-1]['minorplanet']['ast_number']
+                data.extend(response)
+                num_asteroids = len(response)
+                num_asteroids_day += num_asteroids
+                total_asteroids += num_asteroids
             else:
                 continue_query = False
 
@@ -77,7 +83,7 @@ def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list
 
         end_time = time.time()
         date_str = date.strftime("%Y-%m-%d")
-        desc = f"Ephemeris data for {date_str} written to file. {num_asteroids} asteroids observable. Time elapsed: {end_time - start_time:.2f} seconds. "
+        desc = f"Data for {date_str} written to file. {num_asteroids_day} asteroids observable. Time elapsed: {end_time - start_time:.2f} seconds. "
         loop.set_description(desc, refresh=True)
 
     if total_asteroids != 0:
@@ -93,7 +99,7 @@ def get_sky_range(date: datetime, telescope: Telescope) -> tuple[float, float, f
     """ Get the right ascension and declination range for the given date.
     :param date: the date to calculate the range for
     :param telescope: the telescope to calculate the range for
-    :return: the right ascension and declination range for the given date
+    :return: the right ascension and declination range for the given date (ra_min, ra_max, dec_min, dec_max)
     """
     # Collect the right ascension range for the date
     ra_min, ra_max = telescope.get_ra_range(date)

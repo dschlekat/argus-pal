@@ -22,7 +22,7 @@ class Query():
     
 
     # Builds the query based on the inputs
-    def build_query(self, ra_min, ra_max, dec_min, dec_max, date, mag_lim, last_id=None):
+    def build_query(self, ra_min, ra_max, dec_min, dec_max, date, mag_lim, last_id=0):
         """ Builds the GraphQL query based on the inputs.
         :param ra_min: The minimum right ascension.
         :param ra_max: The maximum right ascension.
@@ -31,15 +31,15 @@ class Query():
         :param date: The date of the observation.
         :param mag_lim: The magnitude limit.
         :param last_id: The last asteroid id to continue the query
-        """   
+        """ 
         self.query = f"""query ExampleQuery {{
             ephemeris(
                 where: {{
                 eph_date: {{_eq: "{date}"}},
                 ra:       {{_gte: "{ra_min}", _lte: "{ra_max}"}}, 
                 dec:      {{_gte: "{dec_min}", _lte: "{dec_max}"}},
-                v_mag:    {{_lte: "{mag_lim}"}}
-                {f', id_minorplanet: {{_gt: "{last_id}"}}' if last_id else ''}
+                v_mag:    {{_lte: "{mag_lim}"}},
+                minorplanet: {{ast_number: {{_gt: "{last_id}" }} }}
                 }}
                 order_by: {{id_minorplanet: asc}}
             ) {{

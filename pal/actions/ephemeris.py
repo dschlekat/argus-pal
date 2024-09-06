@@ -24,6 +24,8 @@ def execute(**kwargs):
             - propogation_interval: The interval at which to propogate the asteroid locations throughout the night. Default is 15 minutes.
     :return: 0 if successful, 1 if an error occurred.
     """
+    if os.path.exists("pal/results") == False:
+        os.makedirs("pal/results")
     if os.path.exists("pal/results/ephemera") == False:
         os.makedirs("pal/results/ephemera")
     if os.path.exists("pal/results/logs") == False:
@@ -105,7 +107,7 @@ def log_results(ephemera, **kwargs):
     end_str = kwargs['end_date']
     telescope = kwargs['telescope']
     now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    file_name = f"pal/results/logs/{telescope}_eph_log_{now}.txt"
+    file_name = f"pal/results/logs/eph_log_{telescope}_{now}.txt"
     with open(file_name, 'w') as f:
         f.write(f"Ephemera successfully generated for {telescope} between the dates of {start_str} and {end_str}. \n")
         f.write("Ephemera data available at the following file paths: \n \n")
