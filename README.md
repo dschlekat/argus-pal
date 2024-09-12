@@ -24,4 +24,4 @@ python3 -m pal
 This code can be used freely as long as the user attributes credit to the author (Donovan Schlekat).
 
 ## Acknowledgements
-This project was made possible by the guidance of Dr. Nicholas Law and graduate student Shannon Fitton. The author would also like to thank the Lowell Observatory for providing the Astorb database for public use. 
+This project was made possible by the guidance of Dr. Nicholas Law and graduate students Shannon Fitton, Lawrence Machia, and Will Marshall. The author would also like to thank the Lowell Observatory for providing the Astorb database for public use. 
