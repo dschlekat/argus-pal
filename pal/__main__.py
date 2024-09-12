@@ -23,12 +23,9 @@ from importlib import import_module
 # DONE: Implement the asteroid class for type hinting
 # DONE: Implement query code in pipeline.py
 # DONE: Implement logging code in ephemeris.py and logging.py
+# DONE: Fix query retrying when max asteroids is reached
 
-# TODO: Fix query retrying when max asteroids is reached
-# TODO: Remove datetime dependency
 # TODO: Implement propogate code in propogate.py
-# TODO: Implement sqlite database for storing results
-# TODO: Add checks for database, if dne, create it
 
 def exectute(**kwargs) -> int:
     """ Execute the Argus-PAL tool with the given parameters.
@@ -54,8 +51,8 @@ if __name__ == "__main__":
         # required
         "action": "ephemeris",
         "telescope": "Pathfinder",
-        "start_date": "2025-01-01",
-        "end_date": "2025-01-07",
+        "start_date": "2025-01-08",
+        "end_date": "2025-01-15",
         "mag_lim": True,
         "propogation_interval": 15,
 

@@ -14,8 +14,6 @@ from pal.utils.telescope import Telescope
     The results are written to a file for further analysis.
 """
 
-# TODO: Fix query retrying
-
 def pipeline(dates: list[datetime], telescope: Telescope, mag_lim: bool) -> list[str]:
     """ Query the Lowell Observatory Astorb database for asteroids visible in the sky at the time of observation.
     :param dates: the dates to query the database for
@@ -129,6 +127,11 @@ def log_obserbable_asteroids(data: list[dict], date: datetime, slug: str) -> str
     return file_name
 
 def already_queried(date: datetime, telescope: Telescope) -> bool:
+    """ Check if the data for the given date has already been queried.
+    :param date: the date to check
+    :param telescope: the telescope to check
+    :return: the file name if the data has already been queried, False otherwise
+    """
     date_str = date.strftime("%Y-%m-%d")
     file_name = f"pal/results/observable/{telescope.slug}_{date_str}.json"
     if os.path.exists(file_name):
